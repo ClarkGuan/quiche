@@ -54,6 +54,7 @@ matrix:
        apt:
          packages:
          - [*linux_deps]
+     env:
      before_install:
       # Install and use the current stable release of Go
       - gimme --list
@@ -80,7 +81,7 @@ matrix:
       - RUSTFLAGS="-D warnings" cargo test --verbose --manifest-path tools/qlog/Cargo.toml
       - cargo fmt --manifest-path tools/qlog/Cargo.toml -- --check
       # quiche-apps
-      - RUSTFLAGS="-D warnings" cargo build --verbose --manifest-path tools/apps/Cargo.toml
+      - RUST_BACKTRACE=full RUSTFLAGS="-D warnings" cargo build --verbose --manifest-path tools/apps/Cargo.toml
       - cargo fmt --manifest-path tools/apps/Cargo.toml -- --check
    - name: "stable macOS + iOS"
      language: rust
